@@ -1,3 +1,15 @@
+/*
+    colors:
+    031D3A
+    005377
+    6bfad4
+    F1A208
+    FFFFFF
+    d9d9d9
+    4d4d4d
+    1a1a1a
+*/
+
 html {
   font-size: 14px;
 }
@@ -15,4 +27,14 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: #031D3A;
+  color: #FFFFFF;
+}
+
+.primary-color {
+    color: #005377;
+}
+
+.secondary-color {
+    color: #6bfad4;
 }
