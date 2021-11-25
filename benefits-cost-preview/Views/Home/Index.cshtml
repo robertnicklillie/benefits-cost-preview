@@ -2,7 +2,73 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="card text-center bg-transparent mt-5">
+    <div class="card-title bg-primary-color">
+        <h2>Total Cost</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-3">
+                <h4 class="secondary-color">Annual</h4>
+                <p>$12,000</p>
+            </div>
+            <div class="col-3">
+                <h4 class="secondary-color">Quarterly</h4>
+                <p>$3,000</p>
+            </div>
+            <div class="col-3">
+                <h4 class="secondary-color">Monthly</h4>
+                <p>$1,000</p>
+            </div>
+            <div class="col-3">
+                <h4 class="secondary-color">Per Pay Period</h4>
+                <p>$461.54</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card text-center bg-transparent mt-5">
+    <div class="card-title bg-primary-color">
+        <h2>Employees</h2>
+    </div>
+    <div class="card-body overflow-auto border-0">
+        <div class="row">
+            <table class="table table-responsive text-white">
+                <thead>
+                    <tr class="secondary-color">
+                        <th colspan="2">Employee</th>
+                        <th colspan="4">Benefits Cost</th>
+                        <th colspan="3">Deductions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2"><a href="" class="splash-color"><span class="iconify" data-icon="mdi:account-plus" style="margin-right:5px;"></span>Add Employee</a></td>
+                        <td class="text-muted small bg-table-offset-color">Self<br />($1000 ea.)</td>
+                        <td class="text-muted small bg-table-offset-color">Dependents<br />($500 ea.)</td>
+                        <td class="text-muted small bg-table-offset-color">Discount</td>
+                        <td class="text-muted small bg-table-offset-color fw-bold">Total</td>
+                        <td class="text-muted small">Percent Employer Paid</td>
+                        <td class="text-muted small">Employer Cost<br />(Per Pay Period)</td>
+                        <td class="text-muted small">Employee Deduction<br />(Per Pay Period)</td>
+                    </tr>
+                    <tr>
+                        <td>Joe Atkins</td>
+                        <td>
+                            <a href="" class="splash-color"><span class="iconify" data-icon="mdi:account-edit"></span></a>
+                            <a href="" class="splash-color"><span class="iconify" data-icon="mdi:account-remove"></span></a>
+                        </td>
+                        <td class="bg-table-offset-color">$1000</td>
+                        <td class="bg-table-offset-color">$2000 (4)</td>
+                        <td class="bg-table-offset-color">$300</td>
+                        <td class="bg-table-offset-color fw-bold">$2700</td>
+                        <td>50%</td>
+                        <td class="fw-bold">$1350</td>
+                        <td>$1350</td>                
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
