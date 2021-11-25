@@ -38,7 +38,7 @@
                 <tbody>
                     <tr>
                         <td colspan="2" class="align-bottom">
-                            <a href="" class="splash-color"><span class="iconify" data-icon="mdi:account-plus" style="margin-right:5px;"></span>Add Employee</a>
+                            <a asp-action="AddEmployee" class="splash-color" style="text-decoration: none !important;"><span class="iconify" data-icon="mdi:account-plus" style="margin-right:5px;"></span>Add Employee</a>
                         </td>
                         <td class="align-bottom text-muted small bg-table-offset-color">Self<br />($1000 ea.)</td>
                         <td class="align-bottom text-muted small bg-table-offset-color">Dependents<br />($500 ea.)</td>
@@ -53,8 +53,12 @@
                         <tr>
                             <td>@employee.EmployeeName</td>
                             <td>
-                                <a href="" class="splash-color"><span class="iconify" data-icon="mdi:account-edit"></span></a>
-                                <a href="" class="splash-color"><span class="iconify" data-icon="mdi:account-remove"></span></a>
+                                <a asp-action="EditEmployee" asp-route-id="@employee.EmployeeId" class="splash-color" style="text-decoration: none !important;">
+                                    <span class="iconify" style="margin-right: 5px;" data-icon="mdi:account-edit"></span>
+                                </a>
+                                <a href="" id="employee-@employee.EmployeeId" data-employee-id="@employee.EmployeeId" class="splash-color" style="text-decoration: none !important;">
+                                    <span class="iconify" style="margin-right: 5px;" data-icon="mdi:account-remove"></span>
+                                </a>
                             </td>
                             <td class="bg-table-offset-color">$@employee.SelfCostAnnual.ToString("#.00")</td>
                             <td class="bg-table-offset-color">$@employee.DependentsCostAnnual.ToString("#.00") (@employee.DependentsCount)</td>

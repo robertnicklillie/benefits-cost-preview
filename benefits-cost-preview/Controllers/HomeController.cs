@@ -13,7 +13,8 @@ namespace benefits_cost_preview.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
             var model = new BenefitsCostPreviewViewModel
             {                
@@ -193,6 +194,22 @@ namespace benefits_cost_preview.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddEmployee() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> AddEmployee(string employee)
+        {
+            if (ModelState.IsValid)
+            {
+                // save the employee
+            }
+
+            // return the errors
+
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

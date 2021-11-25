@@ -43,6 +43,12 @@ body {
     border-color: #0090CE;
 }
 
+.btn-primary-color {
+    color: #FFF;
+    background-color: #0090CE;
+    border-color: #0090CE;
+}
+
 .secondary-color {
     color: #39A98B;
 }
@@ -63,10 +69,23 @@ body {
     background-color: #F1A208;
 }
 
-.border-secondary-color {
+.btn-splash-color {
+    background-color: #F1A208;
+    border-color: #F1A208;
+}
+
+.border-splash-color {
     border-color: #F1A208;
 }
 
 .bg-table-offset-color {
     background-color: #030F1E !important;
 }
+
+
+
+.iconify {
+    font-size: 24px;
+    line-height: 14px;
+}
+
