@@ -27,7 +27,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -37,7 +37,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -47,7 +47,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -57,7 +57,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -67,7 +67,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -77,7 +77,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -87,7 +87,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -97,7 +97,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -107,7 +107,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -117,7 +117,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -127,7 +127,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -137,7 +137,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -147,7 +147,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -157,7 +157,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -167,7 +167,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -177,7 +177,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     },
                     new EmployeeBenefitsCostViewModel
                     {
@@ -187,7 +187,7 @@ namespace benefits_cost_preview.Controllers
                         DependentsCostAnnual = 2000m,
                         DependentsCount = 4,
                         DiscountAnnual = 300m,
-                        EmployerCostRate = .77m
+                        EmployerCoverageRate = .77m
                     }
                 }
             };

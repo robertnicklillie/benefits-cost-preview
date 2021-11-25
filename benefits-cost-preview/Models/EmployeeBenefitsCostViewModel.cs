@@ -15,19 +15,33 @@
                 return SelfCostAnnual + DependentsCostAnnual - DiscountAnnual;
             }
         }
-        public Decimal EmployerCostRate { get; set; }
+        public Decimal EmployerCoverageRate { get; set; }
         public Decimal EmployerCostAnnual
         {
             get
             {
-                return (EmployerCostRate * TotalAnnual);
+                return EmployerCostPPP * 26;
+            }
+        }
+        public Decimal EmployerCostPPP
+        {
+            get
+            {
+                return Math.Round(EmployerCoverageRate * TotalAnnual / 26, 2);
             }
         }
         public Decimal EmployeeCostAnnual
         {
             get
             {
-                return ((1 - EmployerCostRate) * TotalAnnual);
+                return EmployeeCostPPP * 26;
+            }
+        }
+        public Decimal EmployeeCostPPP
+        {
+            get
+            {
+                return Math.Round((1 - EmployerCoverageRate) * TotalAnnual / 26, 2);
             }
         }
     }

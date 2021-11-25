@@ -9,21 +9,13 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-3">
+            <div class="col-6">
                 <h4 class="secondary-color">Annual</h4>
-                <p>$@Model.TotalCostAnnual.ToString("#0,000.00")</p>
+                <p>$@((Model.TotalCostPPP * 26).ToString("#.00"))</p>
             </div>
-            <div class="col-3">
-                <h4 class="secondary-color">Quarterly</h4>
-                <p>$@((Model.TotalCostAnnual/4).ToString("#0,000.00"))</p>
-            </div>
-            <div class="col-3">
-                <h4 class="secondary-color">Monthly</h4>
-                <p>$@((Model.TotalCostAnnual/12).ToString("#0,000.00"))</p>
-            </div>
-            <div class="col-3">
+            <div class="col-6">
                 <h4 class="secondary-color">Per Pay Period</h4>
-                <p>$@((Model.TotalCostAnnual/26).ToString("#0,000.00"))</p>
+                <p>$@Model.TotalCostPPP.ToString("#.00")</p>
             </div>
         </div>
     </div>
@@ -45,14 +37,16 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="2"><a href="" class="splash-color"><span class="iconify" data-icon="mdi:account-plus" style="margin-right:5px;"></span>Add Employee</a></td>
-                        <td class="text-muted small bg-table-offset-color">Self<br />($1000 ea.)</td>
-                        <td class="text-muted small bg-table-offset-color">Dependents<br />($500 ea.)</td>
-                        <td class="text-muted small bg-table-offset-color">Discount</td>
-                        <td class="text-muted small bg-table-offset-color fw-bold">Total</td>
-                        <td class="text-muted small">Percent Employer Paid</td>
-                        <td class="text-muted small">Employer Cost<br />(Per Pay Period)</td>
-                        <td class="text-muted small">Employee Deduction<br />(Per Pay Period)</td>
+                        <td colspan="2" class="align-bottom">
+                            <a href="" class="splash-color"><span class="iconify" data-icon="mdi:account-plus" style="margin-right:5px;"></span>Add Employee</a>
+                        </td>
+                        <td class="align-bottom text-muted small bg-table-offset-color">Self<br />($1000 ea.)</td>
+                        <td class="align-bottom text-muted small bg-table-offset-color">Dependents<br />($500 ea.)</td>
+                        <td class="align-bottom text-muted small bg-table-offset-color">Discount</td>
+                        <td class="align-bottom text-muted small bg-table-offset-color fw-bold">Total</td>
+                        <td class="align-bottom text-muted small">Percent Employer Paid</td>
+                        <td class="align-bottom text-muted small">Employer Cost<br />(Per Pay Period)</td>
+                        <td class="align-bottom text-muted small">Employee Deduction<br />(Per Pay Period)</td>
                     </tr>
                     @foreach (var employee in Model.Employees)
                     {
@@ -62,13 +56,13 @@
                                 <a href="" class="splash-color"><span class="iconify" data-icon="mdi:account-edit"></span></a>
                                 <a href="" class="splash-color"><span class="iconify" data-icon="mdi:account-remove"></span></a>
                             </td>
-                            <td class="bg-table-offset-color">$@employee.SelfCostAnnual.ToString("#000.00")</td>
-                            <td class="bg-table-offset-color">$@employee.DependentsCostAnnual.ToString("#000.00") (@employee.DependentsCount)</td>
-                            <td class="bg-table-offset-color">$@employee.DiscountAnnual.ToString("#000.00")</td>
-                            <td class="bg-table-offset-color fw-bold">$@employee.TotalAnnual.ToString("#000.00")</td>
-                            <td>@((employee.EmployerCostRate * 100).ToString("#00"))%</td>
-                            <td class="fw-bold">$@employee.EmployerCostAnnual.ToString("#000.00")</td>
-                            <td>$@employee.EmployeeCostAnnual.ToString("#000.00")</td>
+                            <td class="bg-table-offset-color">$@employee.SelfCostAnnual.ToString("#.00")</td>
+                            <td class="bg-table-offset-color">$@employee.DependentsCostAnnual.ToString("#.00") (@employee.DependentsCount)</td>
+                            <td class="bg-table-offset-color">$@employee.DiscountAnnual.ToString("#.00")</td>
+                            <td class="bg-table-offset-color fw-bold">$@employee.TotalAnnual.ToString("#.00")</td>
+                            <td>@((employee.EmployerCoverageRate * 100).ToString("#.00"))%</td>
+                            <td class="fw-bold">$@employee.EmployerCostPPP.ToString("#.00")</td>
+                            <td>$@employee.EmployeeCostPPP.ToString("#.00")</td>
                         </tr>    
                     }
                 </tbody>
