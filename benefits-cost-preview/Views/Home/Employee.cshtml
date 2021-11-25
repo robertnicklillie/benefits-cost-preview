@@ -1,4 +1,4 @@
-﻿@model AddEmployeeViewModel
+﻿@model EmployeeViewModel
 @{
     ViewData["Title"] = "Add Employee";
 }
@@ -6,28 +6,23 @@
 <h2>Add new employee</h2>
 <hr />
 
-<form asp-action="AddEmployee" method="post" class="mb-3">
-    <div class="mb-4">
-        <label asp-for="FirstName" class="form-label">What is the employee's first and last name?</label>
-        <div class="row">
-            <div class="col">
-                <input asp-for="FirstName" class="form-control" placeholder="First" style="margin-right: 5px;">
-            </div>
-            <div class="col">
-                <input asp-for="LastName" class="form-control" placeholder="Last"> 
-            </div>
+<form asp-action="Employee" method="post" class="mb-3">
+    <div style="width: 50%;">
+        <div class="mb-4">
+            <label asp-for="FirstName" class="form-label">What is the employee's first and last name?</label>
+            <input asp-for="FirstName" placeholder="First" class="form-control mb-2">
+            <input asp-for="LastName" placeholder="Last" class="form-control mb-2">
         </div>
-    </div>
-    <div class="row mb-4">
-        <div class="col">
+        <div class="mb-4">
             <label asp-for="DependentsCount" class="form-label">How many dependents for benefits coverage?</label>
             <input asp-for="DependentsCount" class="form-control" placeholder="0 to 20">
         </div>
-        <div class="col">
+        <div class="mb-4">
             <label asp-for="EmployerCoveragePercent" class="form-label">What percentage will the the employer cover?</label>
             <input asp-for="EmployerCoveragePercent" class="form-control">
         </div>
     </div>
+    <div asp-validation-summary="All"></div>
     <button type="submit" class="btn btn-primary-color">Submit</button>
 </form>
 <a asp-action="Index">Back to preview</a>

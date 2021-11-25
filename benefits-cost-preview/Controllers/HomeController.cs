@@ -17,7 +17,7 @@ namespace benefits_cost_preview.Controllers
         public async Task<IActionResult> Index()
         {
             var model = new BenefitsCostPreviewViewModel
-            {                
+            {
                 Employees = new List<EmployeeBenefitsCostViewModel>
                 {
                     new EmployeeBenefitsCostViewModel
@@ -197,10 +197,14 @@ namespace benefits_cost_preview.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddEmployee() => View();
+        public async Task<IActionResult> Employee(int? id)
+        {
+            return View();
+        }
 
         [HttpPost]
-        public async Task<IActionResult> AddEmployee(string employee)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Employee(EmployeeViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -209,7 +213,7 @@ namespace benefits_cost_preview.Controllers
 
             // return the errors
 
-            return View();
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
