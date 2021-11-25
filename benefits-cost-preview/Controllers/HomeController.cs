@@ -15,12 +15,184 @@ namespace benefits_cost_preview.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
+            var model = new BenefitsCostPreviewViewModel
+            {                
+                Employees = new List<EmployeeBenefitsCostViewModel>
+                {
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    },
+                    new EmployeeBenefitsCostViewModel
+                    {
+                        EmployeeId = 1,
+                        EmployeeName = "Jerry Atkins",
+                        SelfCostAnnual = 1000m,
+                        DependentsCostAnnual = 2000m,
+                        DependentsCount = 4,
+                        DiscountAnnual = 300m,
+                        EmployerCostRate = .77m
+                    }
+                }
+            };
 
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
