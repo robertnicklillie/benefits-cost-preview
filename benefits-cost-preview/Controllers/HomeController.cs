@@ -199,7 +199,7 @@ namespace benefits_cost_preview.Controllers
         [HttpGet]
         public async Task<IActionResult> Employee(int? id)
         {
-            return View();
+            return View(new EmployeeViewModel { });
         }
 
         [HttpPost]

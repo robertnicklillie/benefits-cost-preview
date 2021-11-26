@@ -3,28 +3,62 @@
     ViewData["Title"] = "Add Employee";
 }
 
-<h2>Add new employee</h2>
+<h2>Add New Employee</h2>
 <hr />
 
 <form asp-action="Employee" method="post" class="mb-3">
-    <div style="width: 50%;">
-        <div class="mb-4">
-            <label asp-for="FirstName" class="form-label">What is the employee's first and last name?</label>
-            <input asp-for="FirstName" placeholder="First" class="form-control mb-2">
-            <input asp-for="LastName" placeholder="Last" class="form-control mb-2">
-        </div>
-        <div class="mb-4">
-            <label asp-for="DependentsCount" class="form-label">How many dependents for benefits coverage?</label>
-            <input asp-for="DependentsCount" class="form-control" placeholder="0 to 20">
-        </div>
-        <div class="mb-4">
-            <label asp-for="EmployerCoveragePercent" class="form-label">What percentage will the the employer cover?</label>
-            <input asp-for="EmployerCoveragePercent" class="form-control">
-        </div>
+    <h4 class="primary-color">Employee</h4>
+    <div class="mb-4">
+        <label asp-for="FirstName" class="form-label">What is the employee's first and last name?</label>
+        <input asp-for="FirstName" placeholder="First" class="form-control mb-2">
+        <input asp-for="LastName" placeholder="Last" class="form-control mb-2">
+    </div>        
+    <div class="mb-4">
+        <label asp-for="EmployerCoveragePercent" class="form-label">What percentage will the the employer cover?</label>
+        <input asp-for="EmployerCoveragePercent" class="form-control">
     </div>
+
+    <h4 class="primary-color mt-3">Dependents</h4>
+    <table class="table table-responsive text-white">
+        <thead>
+            <tr class="secondary-color">
+                <th></th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model.Dependents.Count > 0)
+            {
+                @for (int i = 0; i < Model.Dependents.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <a class="splash-color" style="text-decoration: none !important;"><span class="iconify" data-icon="mdi:account-remove" style="margin-right:5px;"></span>Remove Dependent</a>
+                        </td>
+                        <td><input asp-for="Dependents[i].FirstName"></td>
+                        <td><input asp-for="Dependents[i].LastName"></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="3">No dependents</td></tr>
+            }
+
+            <tr>
+                <td>
+                    <a href="" class="splash-color" style="text-decoration: none !important;"><span class="iconify" data-icon="mdi:account-plus" style="margin-right:5px;"></span>Add Dependent</a>
+                </td>
+                <td><input style="width:100%;" disabled /></td>
+                <td><input style="width:100%;" disabled /></td>
+            </tr>
+        </tbody>
+    </table>
     <div asp-validation-summary="All"></div>
-    <button type="submit" class="btn btn-primary-color">Submit</button>
+    <button type="submit" class="btn btn-splash-color">Save</button>
+    <a asp-action="Index" class="btn btn-primary-color">Back</a>
 </form>
-<a asp-action="Index">Back to preview</a>
+
 
 

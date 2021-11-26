@@ -31,6 +31,8 @@ body {
   color: #FFFFFF;
 }
 
+/* pimary color */
+
 .primary-color {
     color: #0090CE;
 }
@@ -49,6 +51,14 @@ body {
     border-color: #0090CE;
 }
 
+.btn-primary-color:hover {
+    color: #000;
+    background-color: #006b99;
+    border-color: #004766;
+}
+
+/* secondary color */
+
 .secondary-color {
     color: #39A98B;
 }
@@ -61,6 +71,20 @@ body {
     border-color: #39A98B;
 }
 
+.btn-secondary-color {
+    color: #FFF;
+    background-color: #39A98B;
+    border-color: #26735e;
+}
+
+    .btn-secondary-color:hover {
+        color: #000;
+        background-color: #26735e;
+        border-color: #13392f;
+    }
+
+/* splash color */
+
 .splash-color {
     color: #F1A208;
 }
@@ -69,14 +93,23 @@ body {
     background-color: #F1A208;
 }
 
-.btn-splash-color {
-    background-color: #F1A208;
-    border-color: #F1A208;
-}
-
 .border-splash-color {
     border-color: #F1A208;
 }
+
+.btn-splash-color {
+    color: #FFF;
+    background-color: #F1A208;
+    border-color: #ad7505;
+}
+
+    .btn-splash-color:hover {
+        color: #000;
+        background-color: #ad7505;
+        border-color: #634303;
+    }
+
+/* misc */
 
 .bg-table-offset-color {
     background-color: #030F1E !important;
