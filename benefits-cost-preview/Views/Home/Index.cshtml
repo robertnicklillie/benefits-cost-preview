@@ -3,9 +3,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="card text-center bg-transparent mt-5">
-    <div class="card-title bg-primary-color">
-        <h2>Total Cost</h2>
+<div class="card text-center bg-transparent border-0 mt-5">
+    <div class="card-title primary-color">
+        <h2 class="mt-2">Total Cost</h2>
+        <hr />
     </div>
     <div class="card-body">
         <div class="row">
@@ -21,24 +22,27 @@
     </div>
 </div>
 
-<div class="card text-center bg-transparent mt-5">
-    <div class="card-title bg-primary-color">
-        <h2>Employees</h2>
+<div class="card bg-transparent border-0 mt-5">
+    <div class="card-title primary-color text-center">
+        <h2 class="mt-2">Employees</h2>
+        <hr />
     </div>
     <div class="card-body overflow-auto border-0">
         <div class="row">
             <table class="table table-responsive text-white">
                 <thead>
-                    <tr class="secondary-color">
+                    <tr class="secondary-color text-center">
                         <th colspan="2">Employee</th>
                         <th colspan="4">Benefits Cost</th>
                         <th colspan="3">Deductions</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="2" class="align-bottom">
-                            <a asp-action="Employee" class="splash-color" style="text-decoration: none !important;"><span class="iconify" data-icon="mdi:account-plus" style="margin-right:5px;"></span>Add Employee</a>
+                        <td class="align-bottom"></td>
+                        <td class="align-bottom">
+                            <a asp-action="Employee" class="splash-color" style="text-decoration: none !important;"><span class="iconify" data-icon="mdi:account-plus" style="margin-right:5px;"></span></a>                            
                         </td>
                         <td class="align-bottom text-muted small bg-table-offset-color">Self<br />($1000 ea.)</td>
                         <td class="align-bottom text-muted small bg-table-offset-color">Dependents<br />($500 ea.)</td>
@@ -47,6 +51,7 @@
                         <td class="align-bottom text-muted small">Percent Employer Paid</td>
                         <td class="align-bottom text-muted small">Employer Cost<br />(Per Pay Period)</td>
                         <td class="align-bottom text-muted small">Employee Deduction<br />(Per Pay Period)</td>
+                        <td class="align-bottom"></td>
                     </tr>
                     @foreach (var employee in Model.Employees)
                     {
@@ -54,19 +59,21 @@
                             <td>@employee.EmployeeName</td>
                             <td>
                                 <a asp-action="Employee" asp-route-id="@employee.EmployeeId" class="splash-color" style="text-decoration: none !important;">
-                                    <span class="iconify" style="margin-right: 5px;" data-icon="mdi:account-edit"></span>
+                                    <span class="iconify" style="margin-left: 5px;" data-icon="mdi:account-edit"></span>
                                 </a>
+                            </td>
+                            <td class="bg-table-offset-color">$@employee.SelfCostAnnual.ToString("#0.00")</td>
+                            <td class="bg-table-offset-color">$@employee.DependentsCostAnnual.ToString("#0.00") (@employee.DependentsCount)</td>
+                            <td class="bg-table-offset-color">$@employee.DiscountAnnual.ToString("#0.00")</td>
+                            <td class="bg-table-offset-color fw-bold secondary-color">$@employee.TotalAnnual.ToString("#0.00")</td>
+                            <td>@((employee.EmployerCoverageRate * 100).ToString("#0.00"))%</td>
+                            <td class="fw-bold secondary-color">$@employee.EmployerCostPPP.ToString("#0.00")</td>
+                            <td>$@employee.EmployeeCostPPP.ToString("#0.00")</td>
+                            <td>
                                 <a href="" id="employee-@employee.EmployeeId" data-employee-id="@employee.EmployeeId" class="splash-color" style="text-decoration: none !important;">
                                     <span class="iconify" style="margin-right: 5px;" data-icon="mdi:account-remove"></span>
                                 </a>
                             </td>
-                            <td class="bg-table-offset-color">$@employee.SelfCostAnnual.ToString("#.00")</td>
-                            <td class="bg-table-offset-color">$@employee.DependentsCostAnnual.ToString("#.00") (@employee.DependentsCount)</td>
-                            <td class="bg-table-offset-color">$@employee.DiscountAnnual.ToString("#.00")</td>
-                            <td class="bg-table-offset-color fw-bold">$@employee.TotalAnnual.ToString("#.00")</td>
-                            <td>@((employee.EmployerCoverageRate * 100).ToString("#.00"))%</td>
-                            <td class="fw-bold">$@employee.EmployerCostPPP.ToString("#.00")</td>
-                            <td>$@employee.EmployeeCostPPP.ToString("#.00")</td>
                         </tr>    
                     }
                 </tbody>
