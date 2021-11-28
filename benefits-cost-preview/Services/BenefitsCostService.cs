@@ -14,9 +14,32 @@ namespace benefits_cost_preview.Services
             _benefitsCostRepository = benefitsCostRepository;
         }
 
-        public async Task<IEnumerable<EmployeeBenefitsCost>> GetAllEmployeesBenefitsCosts(int companyId)
+        public async Task AddOrUpdateEmployee(EmployeeBenefitsCostProfile profile)
         {
-            var allEmployeeCosts = await _benefitsCostRepository.GetAllEmployeesBenefitsCosts(companyId);
+            var dataProfile = new Data.Models.EmployeeBenefitsCostProfile
+            {
+                EmployeeId = profile.EmployeeId,
+                FirstName = profile.FirstName,
+                LastName = profile.LastName,
+                EmployerCoverageRatio = profile.EmployerCoverageRatio,
+                BenefitsCostPerPayPeriod = profile.BenefitsCostPerPayPeriod
+            };
+
+            if (profile.EmployeeDependents != null && profile.EmployeeDependents.Any())
+            {
+                dataProfile.EmployeeDependents = profile.EmployeeDependents.Select(d => new Data.Models.EmployeeDependent
+                {
+                    FirstName = d.FirstName,
+                    LastName = d.LastName
+                }).ToList();
+            }
+
+            await _benefitsCostRepository.AddOrUpdateEmployee(dataProfile);
+        }
+
+        public async Task<IEnumerable<EmployeeBenefitsCost>> GetAllEmployeesBenefitsCosts()
+        {
+            var allEmployeeCosts = await _benefitsCostRepository.GetAllEmployeesBenefitsCosts();
 
             return allEmployeeCosts.Select(e => CalculateBenefitsCost(e));
         }
@@ -30,7 +53,6 @@ namespace benefits_cost_preview.Services
             var serviceProfile = new EmployeeBenefitsCostProfile
             {
                 EmployeeId = dataProfile.EmployeeId,
-                CompanyId = dataProfile.CompanyId,
                 FirstName = dataProfile.FirstName,
                 LastName = dataProfile.LastName,
                 BenefitsCostPerPayPeriod = dataProfile.BenefitsCostPerPayPeriod,
@@ -48,6 +70,11 @@ namespace benefits_cost_preview.Services
             }
 
             return serviceProfile;
+        }
+
+        public Task<EmployeeBenefitsCost> Preview(EmployeeBenefitsCostProfile profile)
+        {
+            throw new NotImplementedException();
         }
 
         private EmployeeBenefitsCost CalculateBenefitsCost(Data.Models.EmployeeBenefitsCostProfile profile)

@@ -15,7 +15,8 @@ $("document").ready(function () {
 
         // create a new dependent for adding
         var newDependent = $("#dependent-template").clone();
-        newDependent.on("click", function (e) {
+        var removeButton = newDependent.find(".dependent-remove");
+        removeButton.on("click", function (e) {
             e.preventDefault();
 
             var dependent = $(this);

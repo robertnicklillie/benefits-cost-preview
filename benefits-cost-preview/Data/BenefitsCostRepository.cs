@@ -4,12 +4,11 @@ namespace benefits_cost_preview.Data
 {
     public class BenefitsCostRepository : IBenefitsCostRepository
     {
-        private List<EmployeeBenefitsCostProfile> employeeBenefitCosts = new List<EmployeeBenefitsCostProfile>()
+        public List<EmployeeBenefitsCostProfile> _profiles = new List<EmployeeBenefitsCostProfile>()
         {
             new EmployeeBenefitsCostProfile
             {
                 EmployeeId = 1,
-                CompanyId = 1234,
                 FirstName = "Archie",
                 LastName = "Osborne",
                 GrossPayPerPayPeriod = 2000m,
@@ -37,7 +36,6 @@ namespace benefits_cost_preview.Data
             new EmployeeBenefitsCostProfile
             {
                 EmployeeId = 2,
-                CompanyId = 1234,
                 FirstName = "Kristian",
                 LastName = "Willis",
                 GrossPayPerPayPeriod = 2000m,
@@ -75,7 +73,6 @@ namespace benefits_cost_preview.Data
             new EmployeeBenefitsCostProfile
             {
                 EmployeeId = 3,
-                CompanyId = 1234,
                 FirstName = "Faye",
                 LastName = "Adams",
                 GrossPayPerPayPeriod = 2000m,
@@ -85,14 +82,45 @@ namespace benefits_cost_preview.Data
             }
         };
 
-        public async Task<List<EmployeeBenefitsCostProfile>> GetAllEmployeesBenefitsCosts(int companyId)
+        public async Task AddOrUpdateEmployee(EmployeeBenefitsCostProfile profile)
         {
-            return employeeBenefitCosts.Where(e => e.CompanyId == companyId).ToList();
+            if (profile.EmployeeId == 0 || !_profiles.Any(p => p.EmployeeId == profile.EmployeeId))
+            {
+                // add new
+
+                profile.EmployeeId = _profiles.Count + 1;
+
+                _profiles.Add(profile);
+            }
+            else
+            {
+                // update existing
+
+                var dataProfile = _profiles.Where(p => p.EmployeeId == profile.EmployeeId).First();
+
+                dataProfile.FirstName = profile.FirstName;
+                dataProfile.LastName = profile.LastName;
+                dataProfile.GrossPayPerPayPeriod = profile.GrossPayPerPayPeriod;
+                dataProfile.BenefitsCostPerPayPeriod = profile.BenefitsCostPerPayPeriod;
+                dataProfile.EmployerCoverageRatio = profile.EmployerCoverageRatio;
+                
+                if (profile.EmployeeDependents != null && profile.EmployeeDependents.Any())
+                {
+                    if (dataProfile.EmployeeDependents != null) dataProfile.EmployeeDependents = null;
+
+                    dataProfile.EmployeeDependents = profile.EmployeeDependents;
+                }
+            }
+        }
+
+        public async Task<List<EmployeeBenefitsCostProfile>> GetAllEmployeesBenefitsCosts()
+        {
+            return _profiles;
         }
 
         public async Task<EmployeeBenefitsCostProfile?> GetEmployeeBenefitsCost(int employeeId)
         {
-            return employeeBenefitCosts.FirstOrDefault(e => e.EmployeeId == employeeId);
+            return _profiles.FirstOrDefault(e => e.EmployeeId == employeeId);
         }
     }
 }

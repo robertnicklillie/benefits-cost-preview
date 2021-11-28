@@ -1,5 +1,6 @@
 ﻿using benefits_cost_preview.Models;
 using benefits_cost_preview.Services;
+using benefits_cost_preview.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -17,11 +18,9 @@ namespace benefits_cost_preview.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(int? companyId)
+        public async Task<IActionResult> Index()
         {
-            if (!companyId.HasValue) companyId = 1234;
-
-            var benefitsCostEmployees = await _benefitsCostService.GetAllEmployeesBenefitsCosts(companyId.Value);
+            var benefitsCostEmployees = await _benefitsCostService.GetAllEmployeesBenefitsCosts();
 
             return View(new BenefitsCostPreviewViewModel
             {
@@ -46,6 +45,7 @@ namespace benefits_cost_preview.Controllers
             {
                 var profile = await _benefitsCostService.GetEmployeeBenefitsCost(id.Value);
 
+                model.EmployeeId = profile.EmployeeId;
                 model.FirstName = profile.FirstName;
                 model.LastName = profile.LastName;
                 model.EmployerCoveragePercent = profile.EmployerCoverageRatio * 100;
@@ -68,6 +68,25 @@ namespace benefits_cost_preview.Controllers
             if (ModelState.IsValid)
             {
                 // save the employee
+
+                var profile = new EmployeeBenefitsCostProfile
+                {
+                    EmployeeId = model.EmployeeId,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    EmployerCoverageRatio = Math.Round(model.EmployerCoveragePercent.Value / 100, 2)
+                };
+
+                if (model.Dependents != null && model.Dependents.Any())
+                {
+                    profile.EmployeeDependents = model.Dependents.Select(d => new EmployeeDependentProfile
+                    {
+                        FirstName = d.FirstName,
+                        LastName = d.LastName
+                    }).ToList();
+                }
+
+                await _benefitsCostService.AddOrUpdateEmployee(profile);
             }
 
             // return the errors

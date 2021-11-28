@@ -64,6 +64,7 @@
         </tbody>
     </table>
     <span id="dependents-count" class="hidden" data-value="@Model.Dependents.Count()"></span>
+    <input asp-for="EmployeeId" type="hidden" />
     <div asp-validation-summary="All"></div>
     <button type="submit" class="btn btn-secondary-color">Save</button>
     <a asp-action="Index" class="btn btn-primary-color">Back</a>

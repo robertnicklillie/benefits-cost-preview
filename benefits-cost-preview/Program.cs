@@ -1,12 +1,14 @@
 using benefits_cost_preview.Data;
+using benefits_cost_preview.Data.Models;
 using benefits_cost_preview.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<IBenefitsCostRepository, BenefitsCostRepository>();
-builder.Services.AddTransient<IBenefitsCostService, BenefitsCostService>();
+builder.Services.AddSingleton<IBenefitsCostService, BenefitsCostService>();
+builder.Services.AddSingleton<IBenefitsCostRepository, BenefitsCostRepository>();
 
 var app = builder.Build();
 
