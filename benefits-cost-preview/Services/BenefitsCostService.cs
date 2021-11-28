@@ -1,5 +1,4 @@
 ﻿using benefits_cost_preview.Data;
-using benefits_cost_preview.Data.Models;
 using benefits_cost_preview.Services.Models;
 
 namespace benefits_cost_preview.Services
@@ -22,14 +21,36 @@ namespace benefits_cost_preview.Services
             return allEmployeeCosts.Select(e => CalculateBenefitsCost(e));
         }
 
-        public async Task<EmployeeBenefitsCost> GetEmployeeBenefitsCost(int employeeId)
+        public async Task<EmployeeBenefitsCostProfile> GetEmployeeBenefitsCost(int employeeId)
         {
-            var employeeBenefitsCost = await _benefitsCostRepository.GetEmployeeBenefitsCost(employeeId);
+            var dataProfile = await _benefitsCostRepository.GetEmployeeBenefitsCost(employeeId);
 
-            return CalculateBenefitsCost(employeeBenefitsCost);
+            if (dataProfile == null) throw new ArgumentException($"Could not find employee with employee id {employeeId}");
+
+            var serviceProfile = new EmployeeBenefitsCostProfile
+            {
+                EmployeeId = dataProfile.EmployeeId,
+                CompanyId = dataProfile.CompanyId,
+                FirstName = dataProfile.FirstName,
+                LastName = dataProfile.LastName,
+                BenefitsCostPerPayPeriod = dataProfile.BenefitsCostPerPayPeriod,
+                EmployerCoverageRatio = dataProfile.EmployerCoverageRatio,
+                GrossPayPerPayPeriod = dataProfile.GrossPayPerPayPeriod
+            };
+
+            if (dataProfile.EmployeeDependents != null && dataProfile.EmployeeDependents.Any())
+            {
+                serviceProfile.EmployeeDependents = dataProfile.EmployeeDependents.Select(d => new EmployeeDependentProfile
+                {
+                    FirstName = d.FirstName,
+                    LastName = d.LastName
+                }).ToList();
+            }
+
+            return serviceProfile;
         }
 
-        private EmployeeBenefitsCost CalculateBenefitsCost(EmployeeBenefitsCostProfile profile)
+        private EmployeeBenefitsCost CalculateBenefitsCost(Data.Models.EmployeeBenefitsCostProfile profile)
         {
             // steps to determine what the costs are include:
             // 1) determine self cost

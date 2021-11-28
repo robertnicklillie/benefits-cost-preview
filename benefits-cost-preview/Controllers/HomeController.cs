@@ -41,14 +41,24 @@ namespace benefits_cost_preview.Controllers
         [HttpGet]
         public async Task<IActionResult> Employee(int? id)
         {
-            if (!id.HasValue) throw new ArgumentException("Employee id was missing when attempting to get an employee");
+            var model = new EmployeeViewModel { };
+            if (id.HasValue)
+            {
+                var profile = await _benefitsCostService.GetEmployeeBenefitsCost(id.Value);
 
-            var employeeBenefitsCost = await _benefitsCostService.GetEmployeeBenefitsCost(id.Value);
+                model.FirstName = profile.FirstName;
+                model.LastName = profile.LastName;
+                model.EmployerCoveragePercent = profile.EmployerCoverageRatio * 100;
+                if (profile.EmployeeDependents != null && profile.EmployeeDependents.Any())
+                    model.Dependents = profile.EmployeeDependents.Select(d => new DependentsViewModel
+                    {
+                        FirstName = d.FirstName,
+                        LastName = d.LastName,
+                        Action = CRUDAction.None
+                    }).ToList();
+            }
 
-            return View(new EmployeeViewModel 
-            { 
-                
-            });
+            return View(model);
         }
 
         [HttpPost]
