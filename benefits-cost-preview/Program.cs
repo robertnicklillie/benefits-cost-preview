@@ -1,7 +1,12 @@
+using benefits_cost_preview.Data;
+using benefits_cost_preview.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IBenefitsCostRepository, BenefitsCostRepository>();
+builder.Services.AddTransient<IBenefitsCostService, BenefitsCostService>();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
 ﻿using benefits_cost_preview.Models;
+using benefits_cost_preview.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,199 +8,47 @@ namespace benefits_cost_preview.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IBenefitsCostService _benefitsCostService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IBenefitsCostService benefitsCostService)
         {
             _logger = logger;
+            _benefitsCostService = benefitsCostService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? companyId)
         {
-            var model = new BenefitsCostPreviewViewModel
-            {
-                Employees = new List<EmployeeBenefitsCostViewModel>
-                {
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    },
-                    new EmployeeBenefitsCostViewModel
-                    {
-                        EmployeeId = 1,
-                        EmployeeName = "Jerry Atkins",
-                        SelfCostAnnual = 1000m,
-                        DependentsCostAnnual = 2000m,
-                        DependentsCount = 4,
-                        DiscountAnnual = 300m,
-                        EmployerCoverageRate = .77m
-                    }
-                }
-            };
+            if (!companyId.HasValue) companyId = 1234;
 
-            return View(model);
+            var benefitsCostEmployees = await _benefitsCostService.GetAllEmployeesBenefitsCosts(companyId.Value);
+
+            return View(new BenefitsCostPreviewViewModel
+            {
+                Employees = benefitsCostEmployees.Select(e => new EmployeeBenefitsCostViewModel
+                {
+                    EmployeeId = e.EmployeeId,
+                    EmployeeName = e.EmployeeName ?? String.Empty,
+                    SelfCostAnnual = e.SelfCostAnnual,
+                    DependentsCostAnnual = e.DependentsCostAnnual,
+                    DependentsCount = e.DependentsCount,
+                    DiscountAnnual = e.DiscountAnnual,
+                    EmployerCoverageRate = e.EmployerCoverageRate
+                })
+            });
         }
 
         [HttpGet]
         public async Task<IActionResult> Employee(int? id)
         {
-            return View(new EmployeeViewModel { Dependents = new List<DependentsViewModel> { new DependentsViewModel { FirstName = "George", LastName = "Smith" } } });
+            if (!id.HasValue) throw new ArgumentException("Employee id was missing when attempting to get an employee");
+
+            var employeeBenefitsCost = await _benefitsCostService.GetEmployeeBenefitsCost(id.Value);
+
+            return View(new EmployeeViewModel 
+            { 
+                
+            });
         }
 
         [HttpPost]
