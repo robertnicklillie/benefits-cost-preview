@@ -11,18 +11,31 @@ function Preview() {
         dataType: 'json',
         success: function (data) {
             if (data.canCalculate) {
-                $('#preview-message').hide();
+                $('#preview-message').slideUp();
                 $('#preview-gross').text(data.employeeGrossPerPayPeriod.toFixed(2));
                 $('#preview-deduction').text(data.employeeCostPerPayPeriod.toFixed(2));
                 $('#preview-net').text(data.employeeNetPerPayPeriod.toFixed(2));
             } else {
-                $('#preview-message').show();
+                $('#preview-message').slideDown();
             }
         },
         error: function (request, error) {
             alert("Request: " + JSON.stringify(request));
         }
     });
+
+    $('#preview-progress').hide();
+}
+
+function ActivatePreview() {
+    $('#preview-progress').show();
+    window.PreviewTimer = setTimeout(Preview, 3000);
+}
+
+function CancelPreview() {
+    if (window.PreviewTimer !== undefined) {
+        clearTimeout(window.PreviewTimer);
+    }
 }
 
 $("document").ready(function () {
@@ -45,7 +58,11 @@ $("document").ready(function () {
             var dependent = $(this).parent().parent();
             dependent.find("#Action").attr("value", "Remove");
             dependent.hide();
+
+            CancelPreview();
+            ActivatePreview();
         });
+        newDependent.on("keydown", () => { CancelPreview(); ActivatePreview(); });
         newDependent.insertBefore("#dependent-template");
 
         // change the data on the template
@@ -69,4 +86,7 @@ $("document").ready(function () {
         dependent.find("#Action").attr("value", "Remove");
         dependent.hide();
     });
+
+    $(".input-preview").on("keydown", () => { CancelPreview(); ActivatePreview(); })
+    $(".button-preview").on("click", () => { CancelPreview(); ActivatePreview(); })
 })

@@ -124,3 +124,8 @@ body {
     color: #dc3545;
 }
 
+.progress-bar {
+    width: 72px;
+    margin-left: 16px;
+    display: none;
+}

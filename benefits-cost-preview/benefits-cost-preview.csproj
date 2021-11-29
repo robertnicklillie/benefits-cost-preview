@@ -7,4 +7,8 @@
     <RootNamespace>benefits_cost_preview</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
