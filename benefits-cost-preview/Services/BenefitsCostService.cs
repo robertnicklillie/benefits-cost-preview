@@ -40,8 +40,14 @@ namespace benefits_cost_preview.Services
         public async Task<IEnumerable<EmployeeBenefitsCost>> GetAllEmployeesBenefitsCosts()
         {
             var allEmployeeCosts = await _benefitsCostRepository.GetAllEmployeesBenefitsCosts();
+            
+            List<EmployeeBenefitsCost> costs = new List<EmployeeBenefitsCost>();
+            foreach (var cost in allEmployeeCosts)
+            {
+                costs.Add(await CalculateBenefitsCost(cost));
+            }
 
-            return allEmployeeCosts.Select(e => CalculateBenefitsCost(e));
+            return costs;
         }
 
         public async Task<EmployeeBenefitsCostProfile> GetEmployeeBenefitsCost(int employeeId)
@@ -56,8 +62,7 @@ namespace benefits_cost_preview.Services
                 FirstName = dataProfile.FirstName,
                 LastName = dataProfile.LastName,
                 BenefitsCostPerPayPeriod = dataProfile.BenefitsCostPerPayPeriod,
-                EmployerCoverageRatio = dataProfile.EmployerCoverageRatio,
-                GrossPayPerPayPeriod = dataProfile.GrossPayPerPayPeriod
+                EmployerCoverageRatio = dataProfile.EmployerCoverageRatio
             };
 
             if (dataProfile.EmployeeDependents != null && dataProfile.EmployeeDependents.Any())
@@ -72,12 +77,29 @@ namespace benefits_cost_preview.Services
             return serviceProfile;
         }
 
-        public Task<EmployeeBenefitsCost> Preview(EmployeeBenefitsCostProfile profile)
+        public async Task<EmployeeBenefitsCost> Preview(EmployeeBenefitsCostProfile profile)
         {
-            throw new NotImplementedException();
+            if (profile == null) throw new ArgumentNullException(nameof(profile));
+            if (profile.EmployeeDependents == null) throw new ArgumentNullException(nameof(profile.EmployeeDependents));
+
+            return await CalculateBenefitsCost(new Data.Models.EmployeeBenefitsCostProfile
+            {
+                EmployeeId = profile.EmployeeId,
+                FirstName = profile.FirstName,
+                LastName = profile.LastName,
+                EmployerCoverageRatio = profile.EmployerCoverageRatio,
+                EmployeeDependents = profile
+                    .EmployeeDependents
+                    .Select(d => new Data.Models.EmployeeDependent
+                    {
+                        FirstName = d.FirstName,
+                        LastName = d.LastName
+                    })
+                    .ToList()
+            });
         }
 
-        private EmployeeBenefitsCost CalculateBenefitsCost(Data.Models.EmployeeBenefitsCostProfile profile)
+        private async Task<EmployeeBenefitsCost> CalculateBenefitsCost(Data.Models.EmployeeBenefitsCostProfile profile)
         {
             // steps to determine what the costs are include:
             // 1) determine self cost
@@ -114,6 +136,8 @@ namespace benefits_cost_preview.Services
             var employerBenefitsCostPerYear = Math.Round(totalAnnualCost * profile.EmployerCoverageRatio, 2);
             var employeeBenefitsCostPerYear = totalAnnualCost - employerBenefitsCostPerYear;
 
+            var employeeCostPerPayPeriod = Math.Round(employeeBenefitsCostPerYear / 26, 2);
+
             return new EmployeeBenefitsCost
             {
                 EmployeeId = profile.EmployeeId,
@@ -122,7 +146,8 @@ namespace benefits_cost_preview.Services
                 DependentsCostAnnual = dependentsCost,
                 DependentsCount = dependentsCount,
                 DiscountAnnual = discount,
-                EmployerCoverageRate = profile.EmployerCoverageRatio
+                EmployerCoverageRate = profile.EmployerCoverageRatio,
+                EmployeeCostPerPayPeriod = employeeCostPerPayPeriod
             };
         }
 

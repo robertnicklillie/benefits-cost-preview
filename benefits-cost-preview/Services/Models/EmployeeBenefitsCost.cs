@@ -9,5 +9,6 @@
         public int DependentsCount { get; set; }
         public decimal DiscountAnnual { get; set; }
         public decimal EmployerCoverageRate { get; set; }
+        public decimal EmployeeCostPerPayPeriod { get; set; }
     }
 }

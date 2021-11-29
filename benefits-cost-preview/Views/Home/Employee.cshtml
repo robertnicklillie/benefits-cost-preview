@@ -7,62 +7,102 @@
 <hr />
 
 <form asp-action="Employee" method="post" class="mb-3">
-    <h4 class="primary-color">Employee</h4>
-    <div class="mb-4">
-        <label asp-for="FirstName" class="form-label">What is the employee's first and last name?</label>
-        <input asp-for="FirstName" placeholder="First Name" class="form-control mb-2">
-        <input asp-for="LastName" placeholder="Last Name" class="form-control mb-2">
-    </div>        
-    <div class="mb-4">
-        <label asp-for="EmployerCoveragePercent" class="form-label">What percentage will the the employer cover?</label>
-        <div class="input-group">
-            <input asp-for="EmployerCoveragePercent" class="form-control" placeholder="0 - 100">
-              <span class="input-group-text">%</span>
-        </div>
-        
-    </div>
+    <div class="row">
+        <div class="col-6">
+            <h4 class="primary-color">Employee</h4>
+            <div class="mb-4">
+                <label asp-for="FirstName" class="form-label">What is the employee's first and last name?</label>
+                <input asp-for="FirstName" placeholder="First Name" class="form-control mb-2">
+                <input asp-for="LastName" placeholder="Last Name" class="form-control mb-2">
+            </div>        
+            <div class="mb-4">
+                <label asp-for="EmployerCoveragePercent" class="form-label">What percentage will the the employer cover?</label>
+                <div class="input-group">
+                    <input asp-for="EmployerCoveragePercent" class="form-control" placeholder="0 - 100">
+                      <span class="input-group-text">%</span>
+                </div>
+            </div>
+            <h4 class="primary-color mt-3">Dependents</h4>
+            <table class="table table-responsive text-white">
+                <thead>
+                    <tr class="secondary-color">
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th style="width:48px;">
+                            <a href="" id="add-new-dependent-button" class="splash-color" style="text-decoration: none !important;line-height:36px;"><span class="iconify" data-icon="mdi:account-plus" style="margin-right:5px;"></span></a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model.Dependents.Count > 0)
+                    {
+                        @for (int i = 0; i < Model.Dependents.Count; i++)
+                        {
+                            <tr>
+                                <td><input class="form-control" style="width:100%;" asp-for="Dependents[i].FirstName" placeholder="First Name" ></td>
+                                <td><input class="form-control" style="width:100%;" asp-for="Dependents[i].LastName" placeholder="Last Name" ></td>
+                                <td>
+                                    <input id="Action" type="hidden" asp-for="Dependents[i].Action" >
+                                    <a href="" class="splash-color dependent-remove" style="text-decoration: none !important;line-height:36px;"><span class="iconify" data-icon="mdi:account-remove" style="margin-right:5px;"></span></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr id="no-dependents"><td colspan="3">No dependents</td></tr>
+                    }
 
-    <h4 class="primary-color mt-3">Dependents</h4>
-    <table class="table table-responsive text-white">
-        <thead>
-            <tr class="secondary-color">
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th style="width:48px;">
-                    <a href="" id="add-new-dependent-button" class="splash-color" style="text-decoration: none !important;line-height:36px;"><span class="iconify" data-icon="mdi:account-plus" style="margin-right:5px;"></span></a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @if(Model.Dependents.Count > 0)
-            {
-                @for (int i = 0; i < Model.Dependents.Count; i++)
-                {
-                    <tr>
-                        <td><input class="form-control" style="width:100%;" asp-for="Dependents[i].FirstName" placeholder="First Name" ></td>
-                        <td><input class="form-control" style="width:100%;" asp-for="Dependents[i].LastName" placeholder="Last Name" ></td>
+                    <tr id="dependent-template" style="display:none;">
+                        <td><input id="FirstName" class="form-control" style="width:100%;" placeholder="First Name" /></td>
+                        <td><input id="LastName" class="form-control" style="width:100%;" placeholder="Last Name" /></td>
                         <td>
-                            <input id="Action" type="hidden" asp-for="Dependents[i].Action" >
+                            <input id="Action" type="hidden" value="Add" />
                             <a href="" class="splash-color dependent-remove" style="text-decoration: none !important;line-height:36px;"><span class="iconify" data-icon="mdi:account-remove" style="margin-right:5px;"></span></a>
                         </td>
                     </tr>
-                }
-            }
-            else
-            {
-                <tr id="no-dependents"><td colspan="3">No dependents</td></tr>
-            }
-
-            <tr id="dependent-template" style="display:none;">
-                <td><input id="FirstName" class="form-control" style="width:100%;" placeholder="First Name" /></td>
-                <td><input id="LastName" class="form-control" style="width:100%;" placeholder="Last Name" /></td>
-                <td>
-                    <input id="Action" type="hidden" value="Add" />
-                    <a href="" class="splash-color dependent-remove" style="text-decoration: none !important;line-height:36px;"><span class="iconify" data-icon="mdi:account-remove" style="margin-right:5px;"></span></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6">
+            <h4 class="primary-color">Pay Period Preview</h4>
+            <p id="preview-message" class="alert alert-warning">
+                <span class="iconify" data-icon="mdi:alert-circle-outline"></span>
+                Please provide more information or correct the information on the screen to get a preview of the cost of benefits.
+            </p>
+            <table class="table table-responsive text-white">
+                <thead>
+                    <tr class="secondary-color">
+                        <th>Description</th>
+                        <th colspan="2">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Gross Pay</td>
+                        <td>$</td>
+                        <td style="text-align:right;">
+                            <span id="preview-gross">---</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Benefits Deduction</td>
+                        <td>$</td>
+                        <td style="text-align:right;">
+                            <span id="preview-deduction">---</span>
+                        </td>
+                    </tr>
+                    <tr class="secondary-color border-0 fw-bold" style="border-bottom-width:0;">
+                        <td style="border-bottom-width:0;">Net Pay</td>
+                        <td style="border-bottom-width:0;">$</td>
+                        <td style="border-bottom-width:0;text-align:right;">
+                            <span id="preview-net">---</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <span id="dependents-count" class="hidden" data-value="@Model.Dependents.Count()"></span>
     <input asp-for="EmployeeId" type="hidden" />
     <div asp-validation-summary="All"></div>

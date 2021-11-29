@@ -3,6 +3,7 @@ using benefits_cost_preview.Services;
 using benefits_cost_preview.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace benefits_cost_preview.Controllers
 {
@@ -79,19 +80,63 @@ namespace benefits_cost_preview.Controllers
 
                 if (model.Dependents != null && model.Dependents.Any())
                 {
-                    profile.EmployeeDependents = model.Dependents.Select(d => new EmployeeDependentProfile
-                    {
-                        FirstName = d.FirstName,
-                        LastName = d.LastName
-                    }).ToList();
+                    profile.EmployeeDependents = model
+                        .Dependents
+                        .Where(d => d.Action != CRUDAction.Remove)
+                        .Select(d => new EmployeeDependentProfile
+                        {
+                            FirstName = d.FirstName,
+                            LastName = d.LastName
+                        })
+                        .ToList();
                 }
 
                 await _benefitsCostService.AddOrUpdateEmployee(profile);
             }
 
-            // return the errors
+            // return the validation errors
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> CalculateBenefitsCost(EmployeeViewModel model)
+        {
+            EmployeeBenefitsCostPreview preview = new EmployeeBenefitsCostPreview();
+            
+            if (ModelState.IsValid)
+            {
+                // save the employee
+
+                var profile = new EmployeeBenefitsCostProfile
+                {
+                    EmployeeId = model.EmployeeId,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    EmployerCoverageRatio = Math.Round(model.EmployerCoveragePercent.Value / 100, 2)
+                };
+
+                if (model.Dependents != null && model.Dependents.Any())
+                {
+                    profile.EmployeeDependents = model
+                        .Dependents
+                        .Where(d => d.Action != CRUDAction.Remove)
+                        .Select(d => new EmployeeDependentProfile
+                        {
+                            FirstName = d.FirstName,
+                            LastName = d.LastName
+                        })
+                        .ToList();
+                }
+
+                var cost = await _benefitsCostService.Preview(profile);
+
+                preview.EmployeeGrossPerPayPeriod = profile.GrossPayPerPayPeriod;
+                preview.EmployeeCostPerPayPeriod = cost.EmployeeCostPerPayPeriod;
+                preview.CanCalculate = true;
+            }
+
+            return new JsonResult(preview);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

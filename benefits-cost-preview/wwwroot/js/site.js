@@ -2,6 +2,29 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+function Preview() {
+    $.ajax({
+        url: '/Home/CalculateBenefitsCost',
+        type: 'POST',
+        data: $('form').serialize(),
+        dataType: 'json',
+        success: function (data) {
+            if (data.canCalculate) {
+                $('#preview-message').hide();
+                $('#preview-gross').text(data.employeeGrossPerPayPeriod.toFixed(2));
+                $('#preview-deduction').text(data.employeeCostPerPayPeriod.toFixed(2));
+                $('#preview-net').text(data.employeeNetPerPayPeriod.toFixed(2));
+            } else {
+                $('#preview-message').show();
+            }
+        },
+        error: function (request, error) {
+            alert("Request: " + JSON.stringify(request));
+        }
+    });
+}
+
 $("document").ready(function () {
     $("#add-new-dependent-button").on("click", function (e) {
         e.preventDefault();
@@ -19,8 +42,7 @@ $("document").ready(function () {
         removeButton.on("click", function (e) {
             e.preventDefault();
 
-            var dependent = $(this);
-            console.log(dependent);
+            var dependent = $(this).parent().parent();
             dependent.find("#Action").attr("value", "Remove");
             dependent.hide();
         });
@@ -44,7 +66,6 @@ $("document").ready(function () {
         e.preventDefault();
 
         var dependent = $(this).parent().parent();
-        console.log(dependent);
         dependent.find("#Action").attr("value", "Remove");
         dependent.hide();
     });
