@@ -17,6 +17,9 @@ function Preview() {
                 $('#preview-net').text(data.employeeNetPerPayPeriod.toFixed(2));
             } else {
                 $('#preview-message').slideDown();
+                $('#preview-gross').text('---');
+                $('#preview-deduction').text('---');
+                $('#preview-net').text('---');
             }
         },
         error: function (request, error) {

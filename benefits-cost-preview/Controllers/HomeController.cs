@@ -92,6 +92,8 @@ namespace benefits_cost_preview.Controllers
                 }
 
                 await _benefitsCostService.AddOrUpdateEmployee(profile);
+
+                return RedirectToAction("Index");
             }
 
             // return the validation errors
