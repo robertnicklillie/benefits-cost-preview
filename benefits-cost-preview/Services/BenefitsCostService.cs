@@ -99,8 +99,10 @@ namespace benefits_cost_preview.Services
             });
         }
 
-        private async Task<EmployeeBenefitsCost> CalculateBenefitsCost(Data.Models.EmployeeBenefitsCostProfile profile)
+        public async Task<EmployeeBenefitsCost> CalculateBenefitsCost(Data.Models.EmployeeBenefitsCostProfile profile)
         {
+            if (profile.EmployerCoverageRatio > 1 || profile.EmployerCoverageRatio < 0) throw new ArgumentException($"{nameof(profile.EmployerCoverageRatio)} cannot be greater than 1 or less than zero");
+
             // steps to determine what the costs are include:
             // 1) determine self cost
             // 2) determine dependent cost
